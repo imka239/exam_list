@@ -131,17 +131,13 @@ struct List {
         clear();
     }
 
-    List(List const& that) {
+    List(List const& that) : List() {
         for (auto x = that.cbegin(); x != that.cend(); ++x) {
             push_back(*x);
         }
     }
 
     List& operator=(List const& that) {
-        for (auto i = that.cbegin(); i != that.cend(); ++i) {
-            std::cout << *i << " ";
-        }
-        std::cout << std::endl;
         if (&that.fake != &fake) {
             clear();
             for (auto x = that.cbegin(); x != that.cend(); ++x) {
@@ -152,7 +148,7 @@ struct List {
         return *this;
     }
 
-    using iterator = Iterator<T>;
+    typedef Iterator<T> iterator;
     using const_iterator = const_Iterator <T>;
     using reverse_iterator = std::reverse_iterator<iterator>;
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
@@ -252,7 +248,7 @@ struct List {
         node *pred = cur->left;
         node *new_n = nullptr;
         try {
-            std::cout << val << " ";
+            //std::cout << val << " ";
             new_n = new extended_node(val, pred, cur);
         } catch (...) {
             //std::cout << "pisos" << std::endl;
